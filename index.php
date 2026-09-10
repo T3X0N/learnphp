@@ -8,26 +8,23 @@ class box {
   public $hasbeemopened = false;
 
   public function open() {
-    if ($this->isopen) {
-      echo "The box is already open.";
-    } else {
-      $this->isopen = true;
-      $this->hasbeemopened = true;
-      echo "The box is now open.";
-    }
+    $this->isopen = true;
   }
+
+  $num1 = 5;
+  $num2 = 10;
+  $num1 = $num2;
+  var_dump($num1, $num2);
+
+  $box1 = new box();
+  $box1->width = 1;
+  $box2 = clone $box1;
+  $box1->width = 2;
+  var_dump($box1, $box2);
+
+$numbers = [1, 2, 3, 4, 5];
+
+foreach ($numbers as $number) {
+  $number+=1;
+  var_dump($number);
 }
-
-$box1 = new box();
-$box1->width = 10;
-$box1->height = 5;
-$box1->depth = 8;
-$box1->open();
-var_dump($box1);
-
-$box2 = new box();
-$box2->width = 12;
-$box2->height = 6;
-$box2->depth = 10;
-$box2->open();
-var_dump($box2);
