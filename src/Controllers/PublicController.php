@@ -68,6 +68,38 @@ class PublicController
         view('us', compact('title', 'posts'));
     }
 
+    public function tech()
+    {
+        $title = 'Technology';
+        $posts = [
+            [
+                'title' => 'AI chips are reshaping laptop performance',
+                'date' => 'January 10, 2021',
+                'author' => 'Marten',
+                'body' => 'New AI-focused silicon is pushing more on-device processing into everyday laptops and tablets.',
+            ],
+            [
+                'title' => 'Cloud security teams are scaling with automation',
+                'date' => 'January 12, 2021',
+                'author' => 'Annika',
+                'body' => 'Teams are automating threat detection and policy checks to keep up with rapid cloud growth.',
+            ],
+            [
+                'title' => 'Low-code tools are accelerating product launches',
+                'date' => 'January 15, 2021',
+                'author' => 'Kaspar',
+                'body' => 'More startups are leaning on visual workflows to ship experiments faster without a large engineering backlog.',
+            ],
+            [
+                'title' => 'Battery breakthroughs are extending mobile workdays',
+                'date' => 'January 18, 2021',
+                'author' => 'Riin',
+                'body' => 'Manufacturers are improving energy density and thermal management while keeping devices lighter and cooler.',
+            ],
+        ];
+        view('tech', compact('title', 'posts'));
+    }
+
     public function test() {
         $db = new App\DB();
     }
