@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+
 function dump(...$values)
 {
     echo '<pre>';
@@ -19,4 +21,13 @@ function e($value): string {
 function redirect(string $path): void {
     header('Location: ' . $path);
     exit;
+}
+
+function auth(): ?User {
+    $userId = filter_var($_SESSION['userID'] ?? null, FILTER_VALIDATE_INT);
+    if ($userId === false || $userId === null || $userId < 1) {
+        return null;
+    }
+
+    return User::find($userId);
 }

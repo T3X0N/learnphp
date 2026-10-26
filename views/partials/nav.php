@@ -9,7 +9,7 @@
                         class="blog-header-logo text-body-emphasis text-decoration-none"
                         href="#">Large</a>
                 </div>
-                <div class="col-4 d-flex justify-content-end align-items-center">
+                <div class="col-4 d-flex justify-content-end align-items-center gap-2">
                     <a class="link-secondary" href="#" aria-label="Search">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +28,16 @@
                             <path d="M21 21l-5.2-5.2"></path>
                         </svg>
                     </a>
-                    <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+                    <?php $currentUser = auth(); ?>
+                    <?php if ($currentUser !== null): ?>
+                        <span class="text-secondary"><?= e($currentUser->name) ?></span>
+                        <form action="/logout" method="POST">
+                            <button class="btn btn-sm btn-outline-secondary" type="submit">Logout</button>
+                        </form>
+                    <?php else: ?>
+                        <a class="btn btn-sm btn-outline-secondary" href="/register">Sign up</a>
+                        <a class="btn btn-sm btn-outline-primary" href="/login">Login</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </header>
@@ -38,6 +47,7 @@
                 <a class="nav-item nav-link link-body-emphasis" href="/us">U.S.</a>
                 <a class="nav-item nav-link link-body-emphasis" href="/tech">Technology</a>
                 <a class="nav-item nav-link link-body-emphasis" href="/form">Form</a>
+                <a class="nav-item nav-link link-body-emphasis" href="/admin/posts">Posts</a>
                 <a class="nav-item nav-link link-body-emphasis" href="/admin/users">Admin users</a>
                 <a class="nav-item nav-link link-body-emphasis" href="#">Culture</a>
                 <a class="nav-item nav-link link-body-emphasis" href="#">Business</a>

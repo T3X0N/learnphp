@@ -2,16 +2,25 @@
 
 use App\Router;
 
-if (preg_match('/\.(?:png|jpg|jpeg|gif|css|js)$/', $_SERVER["REQUEST_URI"])) {
+if (preg_match('/\.(?:png|jpg|jpeg|gif|webp|css|js)$/', $_SERVER["REQUEST_URI"])) {
     return false;    // serve the requested resource as-is.
 }
 
-spl_autoload_register(function ($class){
-    $class = substr($class, strlen('App\\'));
-    $class = str_replace('\\', '/', $class);
-    require_once __DIR__ . "/../src/$class.php";
-});
+if (is_file(__DIR__ . '/../vendor/autoload.php')) {
+    require __DIR__ . '/../vendor/autoload.php';
+} else {
+    spl_autoload_register(static function ($class) {
+        if (!str_starts_with($class, 'App\\')) {
+            return;
+        }
 
+        $class = substr($class, strlen('App\\'));
+        $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
+        require_once __DIR__ . '/../src/' . $class . '.php';
+    });
+}
+
+session_start();
 require __DIR__ . '/../helpers.php';
 require __DIR__ . '/../routes.php';
 

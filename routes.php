@@ -1,6 +1,7 @@
 <?php
 
 use App\Controllers\PublicController;
+use App\Controllers\AuthController;
 use App\Controllers\PostsController;
 use App\Controllers\UsersController;
 use App\Route;
@@ -28,3 +29,9 @@ Route::get('/admin/users/view', [UsersController::class, 'view']);
 Route::get('/admin/users/edit', [UsersController::class, 'edit']);
 Route::post('/admin/users/edit', [UsersController::class, 'update']);
 Route::post('/admin/users/delete', [UsersController::class, 'delete']);
+
+Route::get('/register', [AuthController::class, 'registerForm']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::get('/login', [AuthController::class, 'loginForm']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']);
