@@ -15,6 +15,12 @@ abstract class Model
         return $db->all(static::$table, static::class);
     }
 
+    public static function where(string $field, mixed $value): array
+    {
+        $db = new DB();
+        return $db->where(static::$table, static::class, $field, $value);
+    }
+
     public static function find(int $id): ?static
     {
         $db = new DB();

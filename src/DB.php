@@ -23,6 +23,16 @@ class DB {
         return $statement->fetchAll();
     }
 
+    public function where(string $table, string $class, string $field, mixed $value): array {
+        $statement = $this->conn->prepare(
+            'SELECT * FROM ' . $this->identifier($table)
+            . ' WHERE ' . $this->identifier($field) . ' = :value'
+        );
+        $statement->execute(['value' => $value]);
+        $statement->setFetchMode(PDO::FETCH_CLASS, $class);
+        return $statement->fetchAll();
+    }
+
     public function find(string $table, string $class, int $id) {
         $statement = $this->conn->prepare(
             'SELECT * FROM ' . $this->identifier($table) . ' WHERE id = :id'
